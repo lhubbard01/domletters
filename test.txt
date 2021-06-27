@@ -1,0 +1,7 @@
+"Here is a useful test case.
+for example, it has (a few) instances of invalid
+  characters for 'dominant' qualification.
+As such,   it should be sufficient to verify
+robustness of the implementation."
+- a test case.
+expected count here, including this line: 40

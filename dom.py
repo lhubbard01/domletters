@@ -3,7 +3,7 @@ import string
 import sys
 from functools import reduce
 
-def dominant(X: str, verbose: bool = False):
+def dominant(X: str, verbose: int = 0):
     """returns the sum of all dominant characters, i.e. on a per-word basis, summed
     Args: 
       @X - the candidate string
@@ -19,19 +19,24 @@ def dominant(X: str, verbose: bool = False):
     invalid_flag  = 0 #if an encountered character breaks the candidate substrings validity, is flipped and indicates to not include in dominant string tally
     running_sum   = 0
     
+
+
+    if verbose: print(X)
     mp={k:0 for k in string.ascii_letters.lower()} #per character tally, map
     while idx < len(X):
         if X[idx] in string.ascii_letters: # case : character is a valid candidate for tally regardless of flag
           sb+=X[idx]
         elif X[idx] in "\n ":                # case : break character to potential;y initiate tally
             if not invalid_flag: # is valid substring for dominant character tally
-              if verbose:
-                print(sb)
 
               for letter in sb.lower():
                 mp[letter]+=1 
               running_sum+=max(mp.items(), key=lambda k: k[1])[1] #maximum value acording to custom ordinal definition\
-
+              if verbose:
+                print(sb, max(mp.items(), key = lambda k: k[1])[1])
+                if verbose > 1:
+                  [print( k,v, end=", ") for k,v in mp.items() if v > 0]
+                  print()
             sb, invalid_flag = "", 0 # reset string and valid flag for next candidate when space is encountered
             mp={k:0 for k in string.ascii_letters.lower()}
 
@@ -51,5 +56,5 @@ def dominant(X: str, verbose: bool = False):
 
 
 
-print(dominant(reduce(str.__add__, sys.stdin.readlines(), "")))  # reduce the lines separated from list elements,
+print(dominant(reduce(str.__add__, sys.stdin.readlines(), ""), verbose = 0))  # reduce the lines separated from list elements,
 #captured from stdin on a per newline character basis, into a single string for processing, and return to stdout.
