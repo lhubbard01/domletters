@@ -41,7 +41,8 @@ To run the program, say
     ./domletters <input.txt
 
 where `input.txt` is the input file to be processed.
-
+Note, this file redicrection is required for the script to 
+run as expected and intended.
 ## Example
 
 When run using the file `sentence.txt` in this distribution,
